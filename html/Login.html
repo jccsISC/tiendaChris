@@ -12,6 +12,8 @@
 </head>
 <body>
     <div class="container">
+
+        <!-- Contenedor login -->
         <div id="contenedorcentrado">
             <div id="login">
                 <form id="loginform">
@@ -31,14 +33,69 @@
                 </div>
                 <hr>
                 <div class="pie-form">
-                    <a href="#">¿Perdiste tu contraseña?</a>
-                    <a href="#">¿No tienes Cuenta? Registrate</a>
-                    <hr>
-                    <a href="#">« Volver</a>
+                    <a href="#" type="button"  data-toggle="modal" data-target="#modalReuperar">¿Perdiste tu contraseña?</a>
+                    <a href="#" type="button"  data-toggle="modal" data-target="#modalRegistrar">¿No tienes Cuenta? Registrate</a>
                 </div>
             </div>
         </div>
         
+
+        <!-- Modal para recuperar contrasena -->
+        <div class="modal fade" id="modalReuperar" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="text-center">
+                        <label class="p-0 mt-2">Recuperar contraseña</label>
+                        <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span> 
+                        </button>
+                        <hr class="m-0 p-0">
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin: auto;">
+                            <div class="row container">
+                                <img src="../img/whatsapp.svg" alt="" width="20px" height="20px" class="mr-2">
+                                <label>322 2032288</label>
+                            </div>
+
+                            <div class="row container">
+                                <img src="../img/panorama.svg" alt="" width="20px" height="20px" class="mr-2">
+                                <label>example@hotmail.com</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- Modal para recuperar contrasena -->
+         <div class="modal fade" id="modalRegistrar" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="text-center">
+                        <label class="p-0 mt-2">Registrate</label>
+                        <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span> 
+                        </button>
+                        <hr class="m-0 p-0">
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-control p-5" style="margin: auto;">
+                            <input class="form-control mb-2" type="text" name="txtname" placeholder="Ingrese su nombre" /> 
+                            <input class="form-control  mb-2" type="number" name="txtphone" placeholder="Ingrese su telefóno" /> 
+                            <input class="form-control  mb-2" type="text" name="txtemail" placeholder="Ingrese su correo" /> 
+                            <input class="form-control  mb-2" type="text" name="txtaddress" placeholder="Ingrese su dirección" /> 
+                            <input class="form-control  mb-2" type="text" name="txtpws" placeholder="Ingrese su contraseña" /> 
+                            <input class="btn btn-success float-right" type="submit" value="Guardar">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script type="text/javascript" src="../js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="../js/popper.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 </body>
 </html>
