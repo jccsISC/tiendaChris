@@ -94,30 +94,72 @@
 
         <!-- Modal para ver a los clientes-->
         <div class="modal fade" id="modalClientes" tabindex="-1" role="dialog" aria-labelledby="modalClientesModalCenterTitle" aria-hidden="true" >
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="modalClientesModalCenterTitle">Lista de compras</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <div class="text-center">
+                    <label class="p-0 mt-2" id="modalListaModalCenterTitle">Lista de clientes</label>
+                    <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span> 
+                    </button>
+                    <hr class="m-0 p-0">
                 </div>
                 <div class="modal-body">
-                ...
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                    <table class="table table-hover table-bordered tableList">
+                        <thead>
+                            <tr>
+                                <th scope="col">N</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Telefóno</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Dirección</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-toggle="modal" data-target="#modalEditarClient">
+                                <td>1</td>
+                                <td>Julio Cesar Camacho Silva</td>
+                                <td>4531260729</td>
+                                <td>silva.jc@hotmail.com</td>
+                                <td>PV San Clemente de lima #45  CP 562135</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             </div>
         </div>
 
+        <!-- Modal para modificar datos del cliente -->
+        <div class="modal fade" id="modalEditarClient" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="text-center">
+                        <label class="p-0 mt-2">Editar Usuario</label>
+                        <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span> 
+                        </button>
+                        <hr class="m-0 p-0">
+                    </div>
+                    <div class="modal-body">
+                        <form style="margin: auto;">
+                            <input class="form-control mb-2" disabled type="text" name="txtname" placeholder="Ingrese su nombre" /> 
+                            <input class="form-control  mb-2" disabled type="number" name="txtphone" placeholder="Ingrese su telefóno" /> 
+                            <input class="form-control  mb-2" disabled type="text" name="txtemail" placeholder="Ingrese su correo" /> 
+                            <input class="form-control  mb-2" disabled type="text" name="txtaddress" placeholder="Ingrese su dirección" /> 
+                            <input class="form-control  mb-2" type="text" name="txtaddress" placeholder="Cambiar contraseña" /> 
+                            <input class="btn btn-success float-right" type="submit" value="Guardar">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <button class="btn btn-success mt-5" data-toggle="modal" data-target="#modalLista">Open list</button>
 
         <!-- Modal para ver la lista de compras -->
-        <div class="modal fade" id="modalLista" tabindex="-1" role="dialog" aria-labelledby="modalListaModalCenterTitle" aria-hidden="true">
-            <div id="myModal3" class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal fade" id="modalLista" tabindex="-1" role="dialog" aria-hidden="true">
+            <div id="myModal3" class="modal-dialog modal-md modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="text-center">
                         <label class="p-0 mt-2" id="modalListaModalCenterTitle">Lista de compras</label>
@@ -126,64 +168,18 @@
                         </button>
                         <hr class="m-0 p-0">
                     </div>
-                    <div class="modal-body-sm data-spy=">
-
+                    <div class="modal-body">
                             <table class="table table-hover table-sm table-bordered tableList">
                                 <thead>
                                     <tr>
-                                        <th  scope="col">N</th>
-                                        <th  scope="col">KG</th>
+                                        <th scope="col">N</th>
+                                        <th scope="col">KG</th>
                                         <th scope="col">PRECIO</th>
                                         <th scope="col">PRODUCTO</th>
                                         <th scope="col">QUITAR</th>
                                     </tr>
                                 </thead>
                                 <tbody> 
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
-                                        </td>
-                                    </tr>
                                     <tr>
                                         <td>1</td>
                                         <td>1</td>

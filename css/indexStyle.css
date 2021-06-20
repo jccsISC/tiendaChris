@@ -167,7 +167,7 @@ header ul ul li {
   } */
 
   #myModal3 {
-    top:5%;
+    top:30%;
     left:31%;
     outline: none;
     overflow:hidden;
@@ -178,10 +178,9 @@ header ul ul li {
     font-size: 12px;
     text-align: center;
 
-
 }
 
 .tableList th {
     background-color: #8cc2ff;
-
+    color: #EAEDED;
 }
