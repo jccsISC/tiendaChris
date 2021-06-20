@@ -8,26 +8,90 @@
     
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/indexStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-
     <header>
-        <div>
-            <img src="../img/icono.jpg" alt="" width="5%" height="10%">
+        <div class="container minavbar">
+            <a href="index.html"><img class="logo" src="../img/computado.png" alt="logo"></a>
+            <mi-buscador></mi-buscador>
 
-            <ul>
-                <li><a href="#">Elemento 1</a></li>
-                <li><a href="#">Elemento 2</a></li>
-                <li><a href="#">Elemento 3</a></li>
-                <li><a href="#">Elemento 4</a></li>
-                <li><a href="#">Elemento 5</a></li>
-            </ul>
+            <nav id="menu">
+                <ul>
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Home</a></li>
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Frutas</a></li>
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Verduras</a></li>
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Cereales</a></li> 
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Clientes</a></li>  
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Cerrar sesión</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <div class="container">
+    <div class="container pt-5">
+        <div class="row mt-5" style="display: flex; justify-content: center;">
+            <div class="card mr-5 mt-3">
+                <h1>Berenjena</h1>
+                <div>
+                    <img src="https://dam.cocinafacil.com.mx/wp-content/uploads/2018/03/propiedades-de-la-berenjena.jpg" alt="150px" width="250px">
+                </div>
 
+                <label class="card-text mt-5" >Fresquesita la berenjena a solo <strong>$25 KG</strong></label>
+
+                <div class="row">
+                    <div class="ml-3">
+                        <button class="btnRestar">-1</button>
+                        <label style="font-size: 25px;"><b>0</b></label>
+                        <button class="btnSumar">+1</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
+                    </div>
+                </div>
+                    
+            </div>
+            <div class="card mr-5 mt-3">
+                <h1>Brocoli</h1>
+                <div>
+                    <img src="https://th.bing.com/th/id/R5730af10aa9e59cfd26b52239f526f55?rik=qxyrfIzYERMPbA&pid=ImgRaw" alt="150px" width="250px" height="150px;">
+                </div>
+    
+                <label class="card-text mt-5" >Fresquesita la berenjena a solo <strong>$25 KG</strong></label>
+
+                <div class="row">
+                    <div class="ml-3">
+                        <button class="btnRestar">-1</button>
+                        <label style="font-size: 25px;"><b>0</b></label>
+                        <button class="btnSumar">+1</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <h1>Brocoli</h1>
+                <div>
+                    <img src="https://th.bing.com/th/id/R5730af10aa9e59cfd26b52239f526f55?rik=qxyrfIzYERMPbA&pid=ImgRaw" alt="150px" width="250px" height="150px;">
+                </div>
+    
+                <label class="card-text mt-5" >Fresquesita la berenjena a solo <strong>$25 KG</strong></label>
+
+                <div class="row">
+                    <div class="ml-3">
+                        <button class="btnRestar">-1</button>
+                        <label style="font-size: 25px;"><b>0</b></label>
+                        <button class="btnSumar">+1</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
      </div>
 
 </body>
