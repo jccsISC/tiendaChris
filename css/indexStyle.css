@@ -168,7 +168,20 @@ header ul ul li {
 
   #myModal3 {
     top:5%;
-    left:33%;
+    left:31%;
     outline: none;
     overflow:hidden;
+}
+
+/*Estilo para la tabla lista*/
+.tableList {
+    font-size: 12px;
+    text-align: center;
+
+
+}
+
+.tableList th {
+    background-color: #8cc2ff;
+
 }
