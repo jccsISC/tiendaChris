@@ -18,11 +18,13 @@
 
             <nav id="menu">
                 <ul>
-                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Home</a></li>
-                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Frutas</a></li>
-                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Verduras</a></li>
-                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Cereales</a></li> 
+                    <li><a href="index.html" type="button">Home</a></li>
+                    <li><a href="#" type="button">Frutas</a></li>
+                    <li><a href="#" type="button">Verduras</a></li>
+                    <li><a href="#" type="button">Cereales</a></li> 
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#modalProductos">Productos</a></li>  
                     <li><a href="#" type="button" data-toggle="modal" data-target="#modalClientes">Clientes</a></li>  
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#modalHistorial">Historial</a></li>  
                     <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Cerrar sesión</a></li>
                 </ul>
             </nav>
@@ -42,57 +44,84 @@
                 <label class="card-text mt-5" >Fresquesita la berenjena a solo <strong>$25 KG</strong></label>
 
                 <div class="row">
-                    <div class="ml-3">
-                        <button class="btnRestar">-1</button>
-                        <label style="font-size: 25px;"><b>0</b></label>
-                        <button class="btnSumar">+1</button>
-                    </div>
                     <div>
+                        <input class="form-control mt-4 ml-4" style="width: 150px;" type="number" placeholder="0.0kg">
                         <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
                     </div>
                 </div>
                     
             </div>
             <div class="card mr-5 mt-3">
-                <h1>Brocoli</h1>
+                <h1>Berenjena</h1>
                 <div>
-                    <img src="https://th.bing.com/th/id/R5730af10aa9e59cfd26b52239f526f55?rik=qxyrfIzYERMPbA&pid=ImgRaw" alt="150px" width="250px" height="150px;">
+                    <img src="https://dam.cocinafacil.com.mx/wp-content/uploads/2018/03/propiedades-de-la-berenjena.jpg" alt="150px" width="250px">
                 </div>
-    
+
                 <label class="card-text mt-5" >Fresquesita la berenjena a solo <strong>$25 KG</strong></label>
 
                 <div class="row">
-                    <div class="ml-3">
-                        <button class="btnRestar">-1</button>
-                        <label style="font-size: 25px;"><b>0</b></label>
-                        <button class="btnSumar">+1</button>
-                    </div>
                     <div>
+                        <input class="form-control mt-4 ml-4" style="width: 150px;" type="number" placeholder="0.0kg">
                         <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
                     </div>
                 </div>
+                    
             </div>
-            <div class="card mt-3">
-                <h1>Brocoli</h1>
+            <div class="card mr-5 mt-3">
+                <h1>Berenjena</h1>
                 <div>
-                    <img src="https://th.bing.com/th/id/R5730af10aa9e59cfd26b52239f526f55?rik=qxyrfIzYERMPbA&pid=ImgRaw" alt="150px" width="250px" height="150px;">
+                    <img src="https://dam.cocinafacil.com.mx/wp-content/uploads/2018/03/propiedades-de-la-berenjena.jpg" alt="150px" width="250px">
                 </div>
-    
+
                 <label class="card-text mt-5" >Fresquesita la berenjena a solo <strong>$25 KG</strong></label>
 
                 <div class="row">
-                    <div class="ml-3">
-                        <button class="btnRestar">-1</button>
-                        <label style="font-size: 25px;"><b>0</b></label>
-                        <button class="btnSumar">+1</button>
-                    </div>
                     <div>
+                        <input class="form-control mt-4 ml-4" style="width: 150px;" type="number" placeholder="0.0kg">
                         <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
                     </div>
                 </div>
+                    
             </div>
         </div>
         
+         <!-- Modal para ver la lista de productos-->
+        <div class="modal fade" id="modalProductos" tabindex="-1" role="dialog" aria-hidden="true" >
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="text-center">
+                    <label class="p-0 mt-2">Lista de productos</label>
+                    <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span> 
+                    </button>
+                    <hr class="m-0 p-0">
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-bordered tableList">
+                        <thead>
+                            <tr>
+                                <th scope="col">N</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio por kg</th>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Existencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-toggle="modal" data-target="#modalProduct">
+                                <td>1</td>
+                                <td>Manzana</td>
+                                <td>$45.50</td>
+                                <td>Frutas</td>
+                                <td>200 kg</td>    
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+
         <!-- Modal para ver a los clientes-->
         <div class="modal fade" id="modalClientes" tabindex="-1" role="dialog" aria-labelledby="modalClientesModalCenterTitle" aria-hidden="true" >
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -130,6 +159,102 @@
             </div>
         </div>
 
+        <!-- Modal para ver historial de las compras cliente-->
+        <div class="modal fade" id="modalHistorial" tabindex="-1" role="dialog" aria-hidden="true" >
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="text-center">
+                    <label class="p-0 mt-2">Historial de mis compras</label>
+                    <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span> 
+                    </button>
+                    <hr class="m-0 p-0">
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-bordered tableList">
+                        <thead>
+                            <tr>
+                                <th scope="col">N</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-toggle="modal" data-target="#modalDetalles">
+                                <td>1</td>
+                                <td>02-06-2021</td>
+                                <td>$350.70</td>
+                           
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Modal para ver detalles de la compra-->
+        <div class="modal fade" id="modalDetalles" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="text-center">
+                        <label class="p-0 mt-2" id="modalListaModalCenterTitle">Detalle de la compra</label>
+                        <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span> 
+                        </button>
+                        <hr class="m-0 p-0">
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-hover table-sm table-bordered tableList">
+                            <thead>
+                                <tr>
+                                    <th scope="col">N</th>
+                                    <th scope="col">KG</th>
+                                    <th scope="col">PRECIO</th>
+                                    <th scope="col">PRODUCTO</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>$45.50</td>
+                                    <td>Manzana</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>$45.50</td>
+                                    <td>Manzana</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>$45.50</td>
+                                    <td>Manzana</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>$45.50</td>
+                                    <td>Manzana</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>$45.50</td>
+                                    <td>Manzana</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <label><strong>Total: $45.50</strong></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal para modificar datos del cliente -->
         <div class="modal fade" id="modalEditarClient" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
@@ -155,8 +280,40 @@
             </div>
         </div>
 
+        <!-- Modal para agregar o modificar productos -->
+         <div class="modal fade" id="modalProduct" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="text-center">
+                        <label class="p-0 mt-2">Agregar Producto</label>
+                        <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span> 
+                        </button>
+                        <hr class="m-0 p-0">
+                    </div>
+                    <div class="modal-body">
+                        <form style="margin: auto;">
+                            <input class="form-control mb-2" type="text" name="txtname" placeholder="Ingrese el nombre del producto" /> 
+                            <input class="form-control  mb-2" type="number" name="txtprecio" placeholder="Ingrese el precio por kg" /> 
+                            <select class="form-control form-select mb-2" aria-label="Default select example">
+                                <option selected>Seleccione la categoria</option>
+                                <option value="1">Frutas</option>
+                                <option value="2">Verduras</option>
+                                <option value="3">Cereales</option>
+                              </select>
+                            <input class="form-control  mb-2" type="number" name="txtexistencia" placeholder="Existencia en kg" /> 
+                            <input class="btn btn-success float-right" type="submit" value="Guardar">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <button class="btn btn-success mt-5" data-toggle="modal" data-target="#modalLista">Open list</button>
+
+        <!-- Botón para ver la lista de compras -->
+        <button class="btn btn-success mt-5" data-toggle="modal" data-target="#modalProduct">Add product</button>
+        <!-- Botón para ver la lista de compras -->
+        <button class="btn btn-success mt-5 float-right" data-toggle="modal" data-target="#modalLista">Open list</button>
 
         <!-- Modal para ver la lista de compras -->
         <div class="modal fade" id="modalLista" tabindex="-1" role="dialog" aria-hidden="true">
