@@ -1,3 +1,14 @@
+<?php 
+    include_once 'connect/Users.php';
+    session_start();
+    if(isset($_SESSION["idUser"])){
+        if($_SESSION["isAdmin"] == 1){
+            header("Location: index.php");
+        }else{
+            header("Location: cliente.php");
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +27,7 @@
         <!-- Contenedor login -->
         <div id="contenedorcentrado">
             <div id="login">
-                <form id="loginform">
+                <form method="POST" id="loginform">
                     <label for="usuario">Usuario</label>
                     <input id="usuario" type="text" name="usuario" placeholder="Usuario" required>
                     
@@ -81,18 +92,28 @@
                         <hr class="m-0 p-0">
                     </div>
                     <div class="modal-body">
-                        <form class="form-control p-5" style="margin: auto; background-color: #8cc2ff;">
-                            <input class="form-control mb-2" type="text" name="txtname" placeholder="Ingrese su nombre" /> 
-                            <input class="form-control  mb-2" type="number" name="txtphone" placeholder="Ingrese su telefóno" /> 
-                            <input class="form-control  mb-2" type="text" name="txtemail" placeholder="Ingrese su correo" /> 
-                            <input class="form-control  mb-2" type="text" name="txtaddress" placeholder="Ingrese su dirección" /> 
-                            <input class="form-control  mb-2" type="text" name="txtpws" placeholder="Ingrese su contraseña" /> 
+                        <form method="POST" class="form-control p-5" style="margin: auto; background-color: #8cc2ff;">
+                            <input class="form-control mb-2" type="text" name="txtname" placeholder="Ingrese su nombre" required/> 
+                            <input class="form-control  mb-2" type="number" name="txtphone" placeholder="Ingrese su telefóno" required/> 
+                            <input class="form-control  mb-2" type="text" name="txtemail" placeholder="Ingrese su correo" required/> 
+                            <input class="form-control  mb-2" type="text" name="txtaddress" placeholder="Ingrese su dirección" required/> 
+                            <input class="form-control  mb-2" type="password" name="txtpws" placeholder="Ingrese su contraseña" required/> 
                             <input class="btn btn-success float-right" type="submit" value="Guardar">
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        <?php
+            if(isset($_POST['txtname'])){
+                $user = new Users();
+                $user->registerUser();
+            }
+            if(isset($_POST['usuario'])){
+                $user = new Users();
+                $user->loginUser();
+            }
+        ?>
     </div>
 
     <script type="text/javascript" src="../js/jquery-3.2.1.slim.min.js"></script>

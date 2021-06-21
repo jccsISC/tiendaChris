@@ -1,10 +1,16 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION["idUser"])){
+        header("Location: Login.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Abarrotera</title>
+    <title>Cliente</title>
     
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/indexStyle.css">
@@ -14,18 +20,16 @@
 <body>
     <header>
         <div class="container minavbar">
-            <a href="index.html"><img class="logo" src="../img/computado.png" alt="logo"></a>
+            <a href="index.php"><img class="logo" src="../img/computado.png" alt="logo"></a>
 
             <nav id="menu">
                 <ul>
-                    <li><a href="index.html" type="button">Home</a></li>
+                    <li><a href="index.php" type="button">Home</a></li>
                     <li><a href="#" type="button">Frutas</a></li>
                     <li><a href="#" type="button">Verduras</a></li>
                     <li><a href="#" type="button">Cereales</a></li> 
-                    <li><a href="#" type="button" data-toggle="modal" data-target="#modalProductos">Productos</a></li>  
-                    <li><a href="#" type="button" data-toggle="modal" data-target="#modalClientes">Clientes</a></li>  
                     <li><a href="#" type="button" data-toggle="modal" data-target="#modalHistorial">Historial</a></li>  
-                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Cerrar sesión</a></li>
+                    <li><a id="close" href="Login.php" type="button">Cerrar sesión</a></li>
                 </ul>
             </nav>
         </div>
@@ -424,5 +428,15 @@
   <script type="text/javascript" src="../js/jquery-3.2.1.slim.min.js"></script>
   <script type="text/javascript" src="../js/popper.min.js"></script>
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <script>
+      $("#close").on("click", function(){
+        $.ajax({
+        url: "closeSession.php",
+        context: document.body
+        }).done(function() {
+            
+        });
+      });
+  </script>
 </body>
 </html>
