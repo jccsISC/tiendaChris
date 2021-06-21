@@ -1,8 +1,7 @@
 <?php 
     class Products{
         public $conn = "";
-        function __construct()
-        {
+        function __construct(){
             include_once 'Connection.php';
             $conection = new Connection();
             $this->conn = $conection->getConnection();
@@ -39,6 +38,22 @@
                 <label class="card-text mt-5" >' . $descripcion . ' <strong>$'. $price .' / KG</strong></label>
                 <label class="card-text" >Disponible <strong>'. $quantity .' / KG</strong></label>
             </div>';
+        }
+
+        
+        function updateProduct(){
+            try {
+                $id_product = $_POST['id_product'];
+                $sql = "SELECT * FROM tbl_products WHERE id_product ='".$id_product."'";
+                
+                $this->conn->exec($sql);
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Cambio de Contraseña con Exito</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+            } catch(PDOException $e) {
+                echo "<p class='alert alert-danger'>" . $sql . $e->getMessage() . "</p>";
+            }
         }
 
         function getCategory(){

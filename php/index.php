@@ -6,6 +6,7 @@
     include_once 'connect/Products.php';
     include_once 'connect/Users.php';
     $product = new Products(); 
+    $user = new Users();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +69,6 @@
                         </thead>
                         <tbody>
                             <?php
-                                $user = new Users();
                                 $user->showUser();
                             ?>
                         </tbody>
@@ -78,69 +78,7 @@
             </div>
         </div>
 
-        <!-- Modal para ver detalles de la compra-->
-        <div class="modal fade" id="modalDetalles" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="text-center">
-                        <label class="p-0 mt-2" id="modalListaModalCenterTitle">Detalle de la compra</label>
-                        <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span> 
-                        </button>
-                        <hr class="m-0 p-0">
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-hover table-sm table-bordered tableList">
-                            <thead>
-                                <tr>
-                                    <th scope="col">N</th>
-                                    <th scope="col">KG</th>
-                                    <th scope="col">PRECIO</th>
-                                    <th scope="col">PRODUCTO</th>
-                                </tr>
-                            </thead>
-                            <tbody> 
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="text-center">
-                            <label><strong>Total: $45.50</strong></label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal para modificar datos del cliente -->
+        <!-- Modal para modificar la contra del cliente -->
         <div class="modal fade" id="modalEditarClient" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
                 <div class="modal-content">
@@ -184,26 +122,32 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST" style="margin: auto;">
-                            <input class="form-control mb-2" type="text" name="txtname" placeholder="Ingrese el nombre del producto" required/> 
-                            <input class="form-control mb-2" type="text" name="txtdescripcion" placeholder="Ingrese una descripción" required/> 
-                            <input class="form-control mb-2" type="text" name="txtimage" placeholder="Ingrese la url del producto" required/> 
-                            <input class="form-control  mb-2" type="number" name="txtprecio" placeholder="Ingrese el precio por kg" required/> 
-                            <select class="form-control form-select mb-2" aria-label="Default select example" name="txtcategory" required>
+                            <input class="form-control mb-2" type="hidden" name="txtproduct"  id="txtproduct"/> 
+                            <input class="form-control mb-2" type="text" name="txtname" id="txtname" placeholder="Ingrese el nombre del producto" required/> 
+                            <input class="form-control mb-2" type="text" name="txtdescripcion" id="txtdescripcion" placeholder="Ingrese una descripción" required/> 
+                            <input class="form-control  mb-2" type="number" name="txtprecio" id="txtprecio" placeholder="Ingrese el precio por kg" required/> 
+                            <input class="form-control  mb-2" type="number" name="txtexistencia" id="txtexistencia" placeholder="Existencia en kg" required/> 
+                            <select class="form-control form-select mb-2" aria-label="Default select example" name="txtcategory" id="txtcategory" required>
                                 <option selected>Seleccione la categoria</option>
                                 <?php 
                                     $product->getCategory();
                                 ?>
-                              </select>
-                            <input class="form-control  mb-2" type="number" name="txtexistencia" placeholder="Existencia en kg" required/> 
+                            </select>
+                            <input class="form-control mb-2" type="text" name="txtimage" id="txtimage" placeholder="Ingrese la url del producto" required/> 
                             <input class="btn btn-success float-right" type="submit" value="Guardar">
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        <?php 
+            if(isset($_POST["txtname"])){
+                $product->updateProduct();
+            }
+        ?>
 
-        <!-- Botón para ver la lista de compras -->
-        <button class="btn btn-success mt-5 float-right" data-toggle="modal" data-target="#modalProduct">Add product</button>
+        <!-- Botón para agregar un nuevo producto -->
+        <button class="btn btn-success mt-5 float-right" data-toggle="modal" data-target="#modalProduct">Agregar producto</button>
 
         <?php 
             if(isset($_POST["txtimage"])){
@@ -225,6 +169,18 @@
             $("#txtaddress").val(adderess);
 
             $("#modalEditarClient").modal("show")
+        }
+
+        function showProduct(id_product, name, descripcion, price, quantity, fk_category, imagen){
+            $("#txtproduct").val(id_product);
+            $("#txtname").val(name);
+            $("#txtdescripcion").val(descripcion);
+            $("#txtprecio").val(price);
+            $("#txtexistencia").val(quantity);
+            $("#txtcategory").val(fk_category);
+            $("#txtimage").val(imagen);
+
+            $("#modalProduct").modal("show")
         }
   </script>
 </body>
