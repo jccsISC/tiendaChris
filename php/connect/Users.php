@@ -53,6 +53,7 @@
                 $_SESSION["idUser"] = $row["id_user"];
                 $_SESSION["isAdmin"] = $row["admin"];
             }
+            echo '<script>window.location.replace("Login.php");</script>';
         }
     }
 ?>

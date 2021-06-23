@@ -3,8 +3,8 @@
     if(!isset($_SESSION["idUser"])){
         header("Location: Login.php");
     }
-    include_once 'connect/Products.php';
-    $product = new Products(); 
+    include_once 'connect/ProductsClient.php';
+    $product = new ProductsClient(); 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,13 +23,12 @@
     <header>
         <div class="container minavbar">
             <a href="cliente.php"><img class="logo" src="../img/computado.png" alt="logo"></a>
-
             <nav id="menu">
                 <ul>
                     <li><a href="cliente.php" type="button">Home</a></li>
-                    <li><a href="#" type="button">Frutas</a></li>
-                    <li><a href="#" type="button">Verduras</a></li>
-                    <li><a href="#" type="button">Cereales</a></li> 
+                    <li><a href="cliente.php?idcat=1" type="button">Frutas</a></li>
+                    <li><a href="cliente.php?idcat=2" type="button">Verduras</a></li>
+                    <li><a href="cliente.php?idcat=3" type="button">Cereales</a></li> 
                     <li><a href="#" type="button" data-toggle="modal" data-target="#modalHistorial">Historial</a></li>  
                     <li><a href="#" id="closeSession" type="button">Cerrar sesión</a></li>
                 </ul>
@@ -45,7 +44,11 @@
          <!-- Cards de productos-->
         <div class="row mt-5" style="display: flex; justify-content: center;">
             <?php 
-                $product->getProductosClient();
+                if(isset($_GET["idcat"])){
+                    $product->getProductosByCategory();
+                }else{
+                    $product->getProductosClient();
+                }
             ?>
         </div>
         
@@ -107,7 +110,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                         <!---->
+                            <?php 
+                                $product->getHistorial();
+                            ?>
                         </tbody>
                     </table>
                 </div>
