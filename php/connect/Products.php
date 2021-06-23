@@ -28,6 +28,13 @@
             }
         }
 
+        function getProductosClient() {
+            $sql = 'SELECT * FROM tbl_products';
+            foreach($this->conn->query($sql) as $row) {
+                $this->bindProductsClient($row);
+            }
+        }
+
         function bindProducts($row){
             extract($row);
             $parameters = "'$id_product','$name','$descripcion','$price','$quantity','$fk_category','$imagen'";
@@ -39,6 +46,36 @@
                 <label class="card-text mt-5" >' . $descripcion . ' <strong>$'. $price .' / KG</strong></label>
                 <label class="card-text" >Disponible <strong>'. $quantity .' / KG</strong></label>
             </div>';
+        }
+
+        function bindProductsClient($row){
+            extract($row);
+            $parameters = "'$id_product','$name','$descripcion','$price','$quantity','$fk_category','$imagen'";
+            echo '<div class="card mr-5 mt-3">
+                <h1>' . $name . '</h1>
+                <div>
+                    <img src="'. $imagen .'" alt="150px" width="250px" height="130px">
+                </div>
+                <label class="card-text mt-5" >' . $descripcion . ' <strong>$'. $price .' / KG</strong></label>
+                <div class="row">
+                    <div>
+                        <input id="cantidad" class="form-control mt-4 ml-4" style="width: 150px; " type="number" placeholder="0.0kg">
+                        <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
+                    </div>
+                </div>
+            </div>';
+        }
+
+        function showSales(){
+            $td = "</td><td>";
+            $sql = 'SELECT * FROM tbl_sale WHERE id_sale = '. $_POST["txtidsale"] .'';
+            foreach($this->conn->query($sql) as $row){
+               extract($row);
+               $parameters = "'$id_sale','$date','$total','$fk_user','$paid'";
+                echo '<tr id="detailCompras" data-toggle="modal" onclick="showCompras('.$parameters.')">
+                        <td>'. $id_sale .$td. $date .$td.$total .$td. $fk_user .$td. $paid .'</td>
+                </tr>';
+            }
         }
         
         function updateProduct(){

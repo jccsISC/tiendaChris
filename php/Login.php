@@ -111,11 +111,6 @@
             if(isset($_POST['usuario'])){
                 $user = new Users();
                 $user->loginUser();
-                if($user->admin == 1) {
-                    header("location: index.php");
-                }else {
-                    header("location: cliente.php");
-                }
             }
         ?>
     </div>

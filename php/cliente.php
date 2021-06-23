@@ -3,7 +3,8 @@
     if(!isset($_SESSION["idUser"])){
         header("Location: Login.php");
     }
-
+    include_once 'connect/Products.php';
+    $product = new Products(); 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,7 +31,7 @@
                     <li><a href="#" type="button">Verduras</a></li>
                     <li><a href="#" type="button">Cereales</a></li> 
                     <li><a href="#" type="button" data-toggle="modal" data-target="#modalHistorial">Historial</a></li>  
-                    <li><a id="close" href="Login.php" type="button">Cerrar sesión</a></li>
+                    <li><a href="#" id="closeSession" type="button">Cerrar sesión</a></li>
                 </ul>
             </nav>
         </div>
@@ -38,56 +39,14 @@
 
     <div class="container pt-5">
 
+        <!-- Botón para ver la lista de compras -->
+        <button id="verlLista" class="btn btn-success" style="position: fixed; right:5%; bottom: 5%;">Ver lista de compras</button>
+
          <!-- Cards de productos-->
         <div class="row mt-5" style="display: flex; justify-content: center;">
-            <div class="card mr-5 mt-3">
-                <h1>Berenjena</h1>
-                <div>
-                    <img src="https://dam.cocinafacil.com.mx/wp-content/uploads/2018/03/propiedades-de-la-berenjena.jpg" alt="150px" width="250px">
-                </div>
-
-                <label class="card-text mt-5" >Fresquesita la berenjena a solo <strong>$25 KG</strong></label>
-
-                <div class="row">
-                    <div>
-                        <input class="form-control mt-4 ml-4" style="width: 150px;" type="number" placeholder="0.0kg">
-                        <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
-                    </div>
-                </div>
-                    
-            </div>
-            <div class="card mr-5 mt-3">
-                <h1>Berenjena</h1>
-                <div>
-                    <img src="https://dam.cocinafacil.com.mx/wp-content/uploads/2018/03/propiedades-de-la-berenjena.jpg" alt="150px" width="250px">
-                </div>
-
-                <label class="card-text mt-5" >Fresquesita la berenjena a solo <strong>$25 KG</strong></label>
-
-                <div class="row">
-                    <div>
-                        <input class="form-control mt-4 ml-4" style="width: 150px;" type="number" placeholder="0.0kg">
-                        <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
-                    </div>
-                </div>
-                    
-            </div>
-            <div class="card mr-5 mt-3">
-                <h1>Berenjena</h1>
-                <div>
-                    <img src="https://dam.cocinafacil.com.mx/wp-content/uploads/2018/03/propiedades-de-la-berenjena.jpg" alt="150px" width="250px">
-                </div>
-
-                <label class="card-text mt-5" >Fresquesita la berenjena a solo <strong>$25 KG</strong></label>
-
-                <div class="row">
-                    <div>
-                        <input class="form-control mt-4 ml-4" style="width: 150px;" type="number" placeholder="0.0kg">
-                        <button class="btn btn-primary btn-sm float-right myButton ">Agregar</button>
-                    </div>
-                </div>
-                    
-            </div>
+            <?php 
+                $product->getProductosClient();
+            ?>
         </div>
         
          <!-- Modal para ver la lista de productos-->
@@ -127,43 +86,6 @@
             </div>
         </div>
 
-        <!-- Modal para ver a los clientes-->
-        <div class="modal fade" id="modalClientes" tabindex="-1" role="dialog" aria-labelledby="modalClientesModalCenterTitle" aria-hidden="true" >
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="text-center">
-                    <label class="p-0 mt-2" id="modalListaModalCenterTitle">Lista de clientes</label>
-                    <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span> 
-                    </button>
-                    <hr class="m-0 p-0">
-                </div>
-                <div class="modal-body">
-                    <table class="table table-hover table-bordered tableList">
-                        <thead>
-                            <tr>
-                                <th scope="col">N</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Telefóno</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Dirección</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr data-toggle="modal" data-target="#modalEditarClient">
-                                <td>1</td>
-                                <td>Julio Cesar Camacho Silva</td>
-                                <td>4531260729</td>
-                                <td>silva.jc@hotmail.com</td>
-                                <td>PV San Clemente de lima #45  CP 562135</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            </div>
-        </div>
-
         <!-- Modal para ver historial de las compras cliente-->
         <div class="modal fade" id="modalHistorial" tabindex="-1" role="dialog" aria-hidden="true" >
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -185,12 +107,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-toggle="modal" data-target="#modalDetalles">
-                                <td>1</td>
-                                <td>02-06-2021</td>
-                                <td>$350.70</td>
-                           
-                            </tr>
+             
+                            <?php
+                                $product->showSales();
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -259,66 +179,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal para modificar datos del cliente -->
-        <div class="modal fade" id="modalEditarClient" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="text-center">
-                        <label class="p-0 mt-2">Editar Usuario</label>
-                        <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span> 
-                        </button>
-                        <hr class="m-0 p-0">
-                    </div>
-                    <div class="modal-body">
-                        <form style="margin: auto;">
-                            <input class="form-control mb-2" disabled type="text" name="txtname" placeholder="Ingrese su nombre" /> 
-                            <input class="form-control  mb-2" disabled type="number" name="txtphone" placeholder="Ingrese su telefóno" /> 
-                            <input class="form-control  mb-2" disabled type="text" name="txtemail" placeholder="Ingrese su correo" /> 
-                            <input class="form-control  mb-2" disabled type="text" name="txtaddress" placeholder="Ingrese su dirección" /> 
-                            <input class="form-control  mb-2" type="text" name="txtaddress" placeholder="Cambiar contraseña" /> 
-                            <input class="btn btn-success float-right" type="submit" value="Guardar">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal para agregar o modificar productos -->
-         <div class="modal fade" id="modalProduct" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="text-center">
-                        <label class="p-0 mt-2">Agregar Producto</label>
-                        <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span> 
-                        </button>
-                        <hr class="m-0 p-0">
-                    </div>
-                    <div class="modal-body">
-                        <form style="margin: auto;">
-                            <input class="form-control mb-2" type="text" name="txtname" placeholder="Ingrese el nombre del producto" /> 
-                            <input class="form-control  mb-2" type="number" name="txtprecio" placeholder="Ingrese el precio por kg" /> 
-                            <select class="form-control form-select mb-2" aria-label="Default select example">
-                                <option selected>Seleccione la categoria</option>
-                                <option value="1">Frutas</option>
-                                <option value="2">Verduras</option>
-                                <option value="3">Cereales</option>
-                              </select>
-                            <input class="form-control  mb-2" type="number" name="txtexistencia" placeholder="Existencia en kg" /> 
-                            <input class="btn btn-success float-right" type="submit" value="Guardar">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Botón para ver la lista de compras -->
-        <button class="btn btn-success mt-5" data-toggle="modal" data-target="#modalProduct">Add product</button>
-        <!-- Botón para ver la lista de compras -->
-        <button class="btn btn-success mt-5 float-right" data-toggle="modal" data-target="#modalLista">Open list</button>
 
         <!-- Modal para ver la lista de compras -->
         <div class="modal fade" id="modalLista" tabindex="-1" role="dialog" aria-hidden="true">
@@ -426,18 +286,45 @@
             </div>
         </div>
     </div>
-  <script type="text/javascript" src="../js/jquery-3.2.1.slim.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../js/popper.min.js"></script>
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  
   <script>
-      $("#close").on("click", function(){
-        $.ajax({
-        url: "closeSession.php",
-        context: document.body
-        }).done(function() {
-            
+       
+       function showSales(id_sale, date, total, fk_user, paid){
+            $("#detailCompras").val(id_sale);
+            $("#txtname").val(date);
+            $("#txttotal").val(total);
+            $("#txtfk_user").val(fk_user);
+            $("#txtpaid").val(paid);
+
+            $("#modalHistorial").modal("show")
+        }
+
+       $("#verlLista").on("click", function(){
+            // $("#idproduct").val("");
+            // $("#txtnameproduct").val("");
+            // $("#txtdescripcion").val("");
+            // $("#txtprecio").val("");
+            // $("#txtexistencia").val("");
+            // $("#txtcategory").val("Seleccione la categoria");
+            // $("#txtimage").val("");
+
+            // $("#edit").val("0");
+            // $("#modal-title").html("Agregar Producto");
+            $("#modalLista").modal("show")
         });
-      });
+       
+       $("#closeSession").on("click", function(){
+            $.ajax({
+                method: "POST",
+                url: "connect/close.php",
+                data: { name: "John", location: "Boston" }
+            }).done(function( msg ) {
+                window.location.replace("Login.php");
+            }); 
+        });
   </script>
 </body>
 </html>
