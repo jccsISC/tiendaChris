@@ -9,7 +9,7 @@
     $user = new Users();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,13 +30,15 @@
                 <ul>
                     <li><a href="index.php" type="button">Home</a></li>
                     <li><a href="#" type="button" data-toggle="modal" data-target="#modalClientes">Clientes</a></li>  
-                    <li><a href="#" type="button" data-toggle="modal" data-target="#verUsuarios">Cerrar sesión</a></li>
+                    <li><a href="#" id="closeSession" type="button">Cerrar sesión</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <div class="container pt-5">
+        <!-- Botón para agregar un nuevo producto -->
+        <button id="addProductModal" class="btn btn-success" style="position: fixed; right:5%; bottom: 5%;">Agregar producto</button>
 
          <!-- Cards de productos-->
         <div class="row mt-5" style="display: flex; justify-content: center;">
@@ -114,7 +116,7 @@
             <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="text-center">
-                        <label class="p-0 mt-2">Agregar Producto</label>
+                        <label id="modal-title" class="p-0 mt-2">Agregar</label>
                         <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span> 
                         </button>
@@ -122,13 +124,14 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST" style="margin: auto;">
-                            <input class="form-control mb-2" type="hidden" name="txtproduct"  id="txtproduct"/> 
-                            <input class="form-control mb-2" type="text" name="txtname" id="txtname" placeholder="Ingrese el nombre del producto" required/> 
+                            <input class="form-control mb-2" type="hidden" name="idproduct"  id="idproduct"/> 
+                            <input class="form-control mb-2" type="hidden" name="edit" id="edit"/>
+                            <input class="form-control mb-2" type="text" name="txtname" id="txtnameproduct" placeholder="Ingrese el nombre del producto" required/> 
                             <input class="form-control mb-2" type="text" name="txtdescripcion" id="txtdescripcion" placeholder="Ingrese una descripción" required/> 
                             <input class="form-control  mb-2" type="number" name="txtprecio" id="txtprecio" placeholder="Ingrese el precio por kg" required/> 
                             <input class="form-control  mb-2" type="number" name="txtexistencia" id="txtexistencia" placeholder="Existencia en kg" required/> 
                             <select class="form-control form-select mb-2" aria-label="Default select example" name="txtcategory" id="txtcategory" required>
-                                <option selected>Seleccione la categoria</option>
+                                <option disabled>Seleccione la categoria</option>
                                 <?php 
                                     $product->getCategory();
                                 ?>
@@ -141,22 +144,18 @@
             </div>
         </div>
         <?php 
-            if(isset($_POST["txtname"])){
-                $product->updateProduct();
-            }
-        ?>
-
-        <!-- Botón para agregar un nuevo producto -->
-        <button class="btn btn-success mt-5 float-right" data-toggle="modal" data-target="#modalProduct">Agregar producto</button>
-
-        <?php 
-            if(isset($_POST["txtimage"])){
-                $product->insertProduct();
+            if(isset($_POST["edit"])){
+                if($_POST["edit"] == 0){
+                    $product->insertProduct();
+                }
+                else{
+                    $product->updateProduct();
+                }
             }
         ?>
 
     </div>
-  <script type="text/javascript" src="../js/jquery-3.2.1.slim.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../js/popper.min.js"></script>
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 
@@ -171,9 +170,22 @@
             $("#modalEditarClient").modal("show")
         }
 
-        function showProduct(id_product, name, descripcion, price, quantity, fk_category, imagen){
-            $("#txtproduct").val(id_product);
-            $("#txtname").val(name);
+        $("#addProductModal").on("click", function(){
+            $("#idproduct").val("");
+            $("#txtnameproduct").val("");
+            $("#txtdescripcion").val("");
+            $("#txtprecio").val("");
+            $("#txtexistencia").val("");
+            $("#txtcategory").val("Seleccione la categoria");
+            $("#txtimage").val("");
+
+            $("#edit").val("0");
+            $("#modal-title").html("Agregar Producto");
+            $("#modalProduct").modal("show")
+        });
+        function editProduct(id_product, name, descripcion, price, quantity, fk_category, imagen){
+            $("#idproduct").val(id_product);
+            $("#txtnameproduct").val(name);
             $("#txtdescripcion").val(descripcion);
             $("#txtprecio").val(price);
             $("#txtexistencia").val(quantity);
@@ -181,7 +193,20 @@
             $("#txtimage").val(imagen);
 
             $("#modalProduct").modal("show")
+            $("#edit").val("1");
+            $("#modal-title").html("Editar Producto");
+            $("#modalProduct").modal("show");
         }
+
+        $("#closeSession").on("click", function(){
+            $.ajax({
+                method: "POST",
+                url: "connect/close.php",
+                data: { name: "John", location: "Boston" }
+            }).done(function( msg ) {
+                window.location.replace("Login.php");
+            }); 
+        });
   </script>
 </body>
 </html>

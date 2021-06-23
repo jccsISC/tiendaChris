@@ -54,7 +54,5 @@
                 $_SESSION["isAdmin"] = $row["admin"];
             }
         }
-
-       
     }
 ?>

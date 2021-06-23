@@ -3,9 +3,10 @@
     if(!isset($_SESSION["idUser"])){
         header("Location: Login.php");
     }
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,11 +21,11 @@
 <body>
     <header>
         <div class="container minavbar">
-            <a href="index.php"><img class="logo" src="../img/computado.png" alt="logo"></a>
+            <a href="cliente.php"><img class="logo" src="../img/computado.png" alt="logo"></a>
 
             <nav id="menu">
                 <ul>
-                    <li><a href="index.php" type="button">Home</a></li>
+                    <li><a href="cliente.php" type="button">Home</a></li>
                     <li><a href="#" type="button">Frutas</a></li>
                     <li><a href="#" type="button">Verduras</a></li>
                     <li><a href="#" type="button">Cereales</a></li> 

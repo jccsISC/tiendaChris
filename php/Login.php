@@ -50,7 +50,6 @@
             </div>
         </div>
         
-
         <!-- Modal para recuperar contrasena -->
         <div class="modal fade" id="modalReuperar" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
@@ -112,6 +111,11 @@
             if(isset($_POST['usuario'])){
                 $user = new Users();
                 $user->loginUser();
+                if($user->admin == 1) {
+                    header("location: index.php");
+                }else {
+                    header("location: cliente.php");
+                }
             }
         ?>
     </div>

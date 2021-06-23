@@ -184,3 +184,10 @@ header ul ul li {
     background-color: #8cc2ff;
     color: #EAEDED;
 }
+
+.posicionBtn{
+    position: fixed;
+    top: 120px;
+    right: 50%;
+    width: 180px;
+}
