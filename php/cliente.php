@@ -107,10 +107,7 @@
                             </tr>
                         </thead>
                         <tbody>
-             
-                            <?php
-                                $product->showSales();
-                            ?>
+                         <!---->
                         </tbody>
                     </table>
                 </div>
@@ -140,30 +137,6 @@
                                 </tr>
                             </thead>
                             <tbody> 
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
                                 <tr>
                                     <td>1</td>
                                     <td>1</td>
@@ -211,7 +184,7 @@
                                         <td>Manzana</td>
                                         <td>$45</td>
                                         <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
+                                            <BUtton class="btn btn-danger btn-sm">Del</BUtton>
                                         </td>
                                     </tr>
                                     <tr>
@@ -221,7 +194,7 @@
                                         <td>Manzana</td>
                                         <td>$45</td>
                                         <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
+                                            <BUtton class="btn btn-danger btn-sm">Del</BUtton>
                                         </td>
                                     </tr>
                                     <tr>
@@ -231,47 +204,7 @@
                                         <td>Manzana</td>
                                         <td>$45</td>
                                         <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>$45</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>$45</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>$45</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>$45</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">EL</BUtton>
+                                            <BUtton class="btn btn-danger btn-sm">Del</BUtton>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -292,6 +225,7 @@
   
   <script>
        
+       //Ver detalles de cada compra
        function showSales(id_sale, date, total, fk_user, paid){
             $("#detailCompras").val(id_sale);
             $("#txtname").val(date);
@@ -302,6 +236,7 @@
             $("#modalHistorial").modal("show")
         }
 
+        //Ver lista de compras del "carrito"
        $("#verlLista").on("click", function(){
             // $("#idproduct").val("");
             // $("#txtnameproduct").val("");
@@ -316,6 +251,7 @@
             $("#modalLista").modal("show")
         });
        
+        //Close session
        $("#closeSession").on("click", function(){
             $.ajax({
                 method: "POST",
