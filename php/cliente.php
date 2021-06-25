@@ -16,7 +16,7 @@
     
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/indexStyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../js/fontawesome.js">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -51,6 +51,12 @@
                 }
             ?>
         </div>
+
+        <?php 
+            if(isset($_POST["txtquantity"])){
+                $product->addProduct();
+            }
+        ?>
         
          <!-- Modal para ver la lista de productos-->
         <div class="modal fade" id="modalProductos" tabindex="-1" role="dialog" aria-hidden="true" >
@@ -104,8 +110,9 @@
                     <table class="table table-hover table-bordered tableList">
                         <thead>
                             <tr>
-                                <th scope="col">N</th>
-                                <th scope="col">Fecha</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
                                 <th scope="col">Total</th>
                             </tr>
                         </thead>
@@ -117,44 +124,6 @@
                     </table>
                 </div>
             </div>
-            </div>
-        </div>
-
-        <!-- Modal para ver detalles de la compra-->
-        <div class="modal fade" id="modalDetalles" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="text-center">
-                        <label class="p-0 mt-2" id="modalListaModalCenterTitle">Detalle de la compra</label>
-                        <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span> 
-                        </button>
-                        <hr class="m-0 p-0">
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-hover table-sm table-bordered tableList">
-                            <thead>
-                                <tr>
-                                    <th scope="col">N</th>
-                                    <th scope="col">KG</th>
-                                    <th scope="col">PRECIO</th>
-                                    <th scope="col">PRODUCTO</th>
-                                </tr>
-                            </thead>
-                            <tbody> 
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>$45.50</td>
-                                    <td>Manzana</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="text-center">
-                            <label><strong>Total: $45.50</strong></label>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -173,51 +142,21 @@
                             <table class="table table-hover table-sm table-bordered tableList">
                                 <thead>
                                     <tr>
-                                        <th scope="col">N</th>
+                                        <th scope="col">PRODUCTO</th>
                                         <th scope="col">KG</th>
                                         <th scope="col">PRECIO</th>
-                                        <th scope="col">PRODUCTO</th>
                                         <th scope="col">TOTAL</th>
                                         <th scope="col">QUITAR</th>
                                     </tr>
                                 </thead>
                                 <tbody> 
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>$45</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">Del</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>$45</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">Del</BUtton>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>$45.50</td>
-                                        <td>Manzana</td>
-                                        <td>$45</td>
-                                        <td>
-                                            <BUtton class="btn btn-danger btn-sm">Del</BUtton>
-                                        </td>
-                                    </tr>
+                                    <?php $product->getCar(); ?>
                                 </tbody>
                             </table>
                         </div>
                     <div class="modal-footer">
                         <label for=""></label>
-                        <label for="Name">Total: $45.50</label>
+                        <?php $product->getTotalCar(); ?>
                     <button type="button" class="btn btn-primary">Pagar</button>
                     </div>
                 </div>
@@ -227,9 +166,22 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../js/popper.min.js"></script>
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-  
+  <?php 
+        if(isset($_SESSION['redirect'])){
+            if($_SESSION["redirect"] == 1){
+                $_SESSION["redirect"] = 0;
+                echo '<script>window.location.replace("cliente.php")</script>';
+            }
+        }
+        if(isset($_SESSION['delete']))
+        {
+            if($_SESSION["delete"] == 1){
+                $_SESSION["delete"] = 0;
+                echo '<script>$("#modalLista").modal("show")</script>';
+            }
+        }
+  ?>
   <script>
-       
        //Ver detalles de cada compra
        function showSales(id_sale, date, total, fk_user, paid){
             $("#detailCompras").val(id_sale);
@@ -241,18 +193,18 @@
             $("#modalHistorial").modal("show")
         }
 
+        function deleteCar(idprod){
+            $.ajax({
+                method: "POST",
+                url: "connect/deleteFromCar.php",
+                data: { idproduct: idprod }
+            }).done(function( msg ) {
+                window.location.replace("cliente.php");
+            }); 
+        }
+
         //Ver lista de compras del "carrito"
        $("#verlLista").on("click", function(){
-            // $("#idproduct").val("");
-            // $("#txtnameproduct").val("");
-            // $("#txtdescripcion").val("");
-            // $("#txtprecio").val("");
-            // $("#txtexistencia").val("");
-            // $("#txtcategory").val("Seleccione la categoria");
-            // $("#txtimage").val("");
-
-            // $("#edit").val("0");
-            // $("#modal-title").html("Agregar Producto");
             $("#modalLista").modal("show")
         });
        
