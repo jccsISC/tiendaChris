@@ -105,5 +105,20 @@
                 echo '<option value="' . $id_category . '">' . $name . '</option>';
             }
         }
+
+        function getHistorial(){
+            try {
+                $sql = 'SELECT p.name as name, d.quantity, d.price FROM tbl_detail_sale AS d INNER JOIN tbl_products AS p ON (p.id_product = d.fk_product)';
+                foreach($this->conn->query($sql) as $row){
+                    extract($row);
+                    echo '<tr><td>'. $name .'</td>'
+                        .'<td>'. $quantity .'</td>'
+                        .'<td>$'. $price .'</td>'
+                        .'<td>$'. ($price * $quantity) .'</td></tr>';
+                }
+            } catch(PDOException $e) {
+                echo "<p class='alert alert-danger'>" . $e->getMessage() . "</p>";
+            }
+        }
     }
 ?>

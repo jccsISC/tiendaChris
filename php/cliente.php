@@ -111,7 +111,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Producto</th>
-                                <th scope="col">Cantidad</th>
+                                <th scope="col">Kg</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Total</th>
                             </tr>
@@ -130,7 +130,7 @@
         <!-- Modal para ver la lista de compras -->
         <div class="modal fade" id="modalLista" tabindex="-1" role="dialog" aria-hidden="true">
             <div id="myModal3" class="modal-dialog modal-md modal-dialog-scrollable" role="document">
-                <div class="modal-content">
+                <div class="modal-content" style="height: 490px;">
                     <div class="text-center">
                         <label class="p-0 mt-2" id="modalListaModalCenterTitle">Lista de compras</label>
                         <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
@@ -138,8 +138,8 @@
                         </button>
                         <hr class="m-0 p-0">
                     </div>
-                    <div class="modal-body">
-                            <table class="table table-hover table-sm table-bordered tableList">
+                    <div class="modal-body" style="overflow-y: auto;">
+                            <table class="table table-hover table-sm table-bordered tableList" style="max-height: 350px;">
                                 <thead>
                                     <tr>
                                         <th scope="col">PRODUCTO</th>
@@ -154,10 +154,24 @@
                                 </tbody>
                             </table>
                         </div>
-                    <div class="modal-footer">
-                        <label for=""></label>
-                        <?php $product->getTotalCar(); ?>
-                    <button type="button" class="btn btn-primary">Pagar</button>
+                    <div class="container">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label>Total: </label>
+                                <?php $product->getTotalCar(); ?>
+                            </div>
+                            <div class="col">
+                                <label>Pago: </label>
+                                <input id="efectivo" class="form-control" type="number" placeholder="0.0" required>
+                            </div>
+                            <div class="col">
+                                <label>Cambio: </label>
+                                <input id="cambio" disabled class="form-control" type="number" placeholder="0.0" required>
+                            </div>
+                            <div class="col">
+                                <button id="pagar" type="button" class="btn btn-primary" style="margin-top: 33px; width:120px;">Pagar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -217,6 +231,38 @@
             }).done(function( msg ) {
                 window.location.replace("Login.php");
             }); 
+        });
+
+        $("#pagar").on("click", function(){
+            const pago = parseInt($("#efectivo").val());
+            const total = parseInt($("#totalpagar").val());
+            if(pago != 0 && !isNaN(pago)){
+                if(pago < total){
+                    alert("El pago no es suficiente");
+                }else{
+                    $.ajax({
+                        method: "POST",
+                        url: "connect/pay.php",
+                        data: { name: "John", location: "Boston" }
+                    }).done(function( msg ) {
+                        window.location.replace("cliente.php");
+                    }); 
+                }
+            }else{
+                alert("Ingresa el monto del pago");
+            }
+        });
+
+        $("#efectivo").change(function(){
+            const pago = parseInt($("#efectivo").val());
+            const total = parseInt($("#totalpagar").val());
+            if(pago != 0 && !isNaN(pago) && total != 0 && !isNaN(total)){
+                const result = pago-total;
+                if(result > 0)
+                    $("#cambio").val(result);
+                else
+                $("#cambio").val("0");
+            }
         });
   </script>
 </body>

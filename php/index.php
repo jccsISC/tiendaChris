@@ -29,7 +29,8 @@
             <nav id="menu">
                 <ul>
                     <li><a href="index.php" type="button">Home</a></li>
-                    <li><a href="#" type="button" data-toggle="modal" data-target="#modalClientes">Clientes</a></li>  
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#modalClientes">Clientes</a></li>
+                    <li><a href="#" type="button" data-toggle="modal" data-target="#modalHistorial">Historial</a></li>  
                     <li><a href="#" id="closeSession" type="button">Cerrar sesión</a></li>
                 </ul>
             </nav>
@@ -141,6 +142,37 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+         <!-- Modal para ver historial de las compras cliente-->
+         <div class="modal fade" id="modalHistorial" tabindex="-1" role="dialog" aria-hidden="true" >
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="text-center">
+                    <label class="p-0 mt-2">Historial de mis compras</label>
+                    <button type="button" class="close float-right m-2" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span> 
+                    </button>
+                    <hr class="m-0 p-0">
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-bordered tableList">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Kg</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                                $product->getHistorial();
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             </div>
         </div>
         <?php 

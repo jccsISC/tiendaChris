@@ -45,7 +45,6 @@
 
         function bindProductsClient($row){
             extract($row);
-            $parameters = "'$id_product','$name','$descripcion','$price','$quantity','$fk_category','$imagen'";
             echo '<div class="card mr-5 mt-3" style="height:370px">
                 <h1>' . $name . '</h1>
                 <div>
@@ -77,10 +76,10 @@
                 $sql = 'SELECT * FROM tbl_detail_sale WHERE fk_user = ' . $_SESSION["idUser"] . ' && paid = 1';
                 foreach($this->conn->query($sql) as $row){
                     extract($row);
-                    echo '<td>'. $fk_user .'</td>'
-                        .'<td>'. $price .'</td>'
+                    echo '<tr><td>'. $fk_user .'</td>'
                         .'<td>'. $quantity .'</td>'
-                        .'<td>'. ($price * $quantity) .'</td>';
+                        .'<td>$'. $price .'</td>'
+                        .'<td>$'. ($price * $quantity) .'</td></tr>';
                 }
             } catch(PDOException $e) {
                 echo "<p class='alert alert-danger'>" . $e->getMessage() . "</p>";
@@ -111,7 +110,7 @@
                         WHERE fk_user = ' . $_SESSION['idUser'] . ' AND paid = 0';
                 foreach($this->conn->query($sql) as $row){
                     extract($row);
-                    echo '<label for="Name">Total: $'. $total .'</label>';
+                    echo '<input id="totalpagar" class="form-control" disabled value="'.$total.'">';
                 }
             } catch(PDOException $e) {
                 echo "<p class='alert alert-danger'>" . $e->getMessage() . "</p>";
@@ -121,7 +120,15 @@
         function deleteFromCar($id){
             try {
                 $sql = 'DELETE FROM tbl_detail_sale WHERE paid = 0 AND fk_user = '. $_SESSION['idUser'] .' AND fk_product = ' . $id;
-                echo $sql;
+                $this->conn->exec($sql);
+            } catch(PDOException $e) {
+                echo "<p class='alert alert-danger'>" . $e->getMessage() . "</p>";
+            }
+        }
+
+        function payCar($iduser){
+            try {
+                $sql = 'UPDATE tbl_detail_sale SET paid = 1 WHERE fk_user = '. $iduser .' AND paid = 0';
                 $this->conn->exec($sql);
             } catch(PDOException $e) {
                 echo "<p class='alert alert-danger'>" . $e->getMessage() . "</p>";
